@@ -187,7 +187,7 @@ class MovieController extends Controller
 
         $client = new GuzzleClient();
         try {
-                $response = $client->request('GET', $apiUrl.'movie/'.$id, [
+                $response = $client->request('GET', $apiUrl.'movie/'.$id.'?language=fr', [
                     RequestOptions::VERIFY => $apiVerify,
                     'headers' => [
                     'Authorization' => 'Bearer '.$apiKey,
