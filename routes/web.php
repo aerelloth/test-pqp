@@ -29,4 +29,9 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/movies/listing', [MovieController::class, 'index']);
+/* MOVIES */
+//Listing
+Route::get('/movies/listing', [MovieController::class, 'index'])->name('movies_listing');
+
+//Détail film
+Route::get('/movies/detail/{id}', [MovieController::class, 'show'])->name('movies_detail');

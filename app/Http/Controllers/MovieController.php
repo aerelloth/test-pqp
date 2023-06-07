@@ -29,7 +29,6 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -37,7 +36,11 @@ class MovieController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $movie = Movie::find($id);
+        if (is_null($movie)) {
+            return redirect()->route('movies_listing');
+        }
+        return view('movies.detail', ['movie' => $movie]);
     }
 
     /**
