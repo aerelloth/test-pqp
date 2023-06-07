@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Movie;
+use App\Models\ApiConfig;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
@@ -25,8 +26,9 @@ class MovieController extends Controller
      */
     public function displayAll()
     {
+        $api_config = ApiConfig::orderBy('updated_at', 'DESC')->first();
         $movies = Movie::all()->sortByDesc('updated_at');
-        return view('movies/display-all', ['movies' => $movies]);
+        return view('movies/display-all', compact('movies', 'api_config'));
     }
 
     /**
