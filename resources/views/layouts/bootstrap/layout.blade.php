@@ -13,6 +13,7 @@
         </header>
         <main>
             <div class="container mt-5">
+                @include('layouts.bootstrap._alerts')
                 @yield('content')
             </div>
         </main>

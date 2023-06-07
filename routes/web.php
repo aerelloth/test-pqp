@@ -35,3 +35,6 @@ Route::get('/movies/listing', [MovieController::class, 'index'])->name('movies_l
 
 //Détail film
 Route::get('/movies/detail/{id}', [MovieController::class, 'show'])->name('movies_detail');
+
+//Suppression film
+Route::get('/movies/delete/{id}', [MovieController::class, 'destroy']);

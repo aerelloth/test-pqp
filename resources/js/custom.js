@@ -21,3 +21,12 @@ let table = new DataTable('.dataTable', {
       ],
       order: [[1, 'asc']]
 });
+
+//Confirmation pour opérations sensibles
+let link = document.querySelector('.confirmation-required');
+
+    link.addEventListener('click', (event) => {
+    if (!confirm('Êtes-vous sûr·e ?')) {
+        event.preventDefault();
+    }
+});

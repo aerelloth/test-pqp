@@ -23,7 +23,7 @@
                 <tr>
                     <td>
                         <a href="{{ url('/movies/detail', ['id' => $movie->id]) }}"><i class="bi bi-pencil-square"></i></a>
-                        <a href="{{ url('/movies/delete', ['id' => $movie->id]) }}"><i class="bi bi-x-square"></i></a>
+                        <a href="{{ url('/movies/delete', ['id' => $movie->id]) }}" class="confirmation-required"><i class="bi bi-x-square"></i></a>
                     </td>
                     @foreach ($movie->getAttributes() as $value)
                         <td>{{ \Illuminate\Support\Str::limit($value, 100) }}</td>

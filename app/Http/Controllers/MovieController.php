@@ -100,6 +100,8 @@ class MovieController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $movie = Movie::find($id);
+        $movie->delete();
+        return redirect()->back()->with('success', 'Le film a été supprimé avec succès.');
     }
 }
