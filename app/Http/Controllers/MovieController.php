@@ -19,8 +19,9 @@ class MovieController extends Controller
      */
     public function index()
     {
+        $api_config = ApiConfig::orderBy('updated_at', 'DESC')->first();
         $movies = Movie::all();
-        return view('movies/listing', ['movies' => $movies]);
+        return view('movies/listing', compact('movies', 'api_config'));
     }
 
     /**
@@ -88,11 +89,12 @@ class MovieController extends Controller
      */
     public function show(string $id)
     {
+        $api_config = ApiConfig::orderBy('updated_at', 'DESC')->first();
         $movie = Movie::find($id);
         if (is_null($movie)) {
             return redirect()->route('movies_listing');
         }
-        return view('movies.detail', ['movie' => $movie]);
+        return view('movies.detail', compact('movie', 'api_config'));
     }
 
     /**
