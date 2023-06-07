@@ -98,11 +98,12 @@ class MovieController extends Controller
      */
     public function displayOne(string $id)
     {
+        $api_config = ApiConfig::orderBy('updated_at', 'DESC')->first();
         $movie = Movie::find($id);
         if (is_null($movie)) {
             return redirect()->route('home');
         }
-        return view('movies.display-one', ['movie' => $movie]);
+        return view('movies.display-one', compact('movie', 'api_config'));
     }
 
     /**

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="text-center">
-    <h1 class="pt-3 pb-3 display-3">Les films du moment</h1>
+    <h1 class="pt-3 pb-3 display-3 fw-semibold">Les films du moment</h1>
 
     @if ($movies->isEmpty())
         <p>Il n'y a encore aucun film enregistré.</p>
@@ -12,11 +12,20 @@
         @foreach ($movies as $movie)
             <div class="col">
                 <div class="card h-100">
-                  <a href="{{ url('/movies/infos', ['id' => $movie->id]) }}">
-                    <img src="{{$api_config->images_secure_base_url.'w500'.$movie->backdrop_path}}" class="card-img-top" alt="{{$movie->title}}">
-                  </a>
+                    @if ($movie->backdrop_path)
+                      <a href="{{ url('/movies/infos', ['id' => $movie->id]) }}">
+                        <img src="{{$api_config->images_secure_base_url.'w500'.$movie->backdrop_path}}" class="card-img-top" alt="{{$movie->title}}">
+                      </a>
+                    @endif
                   <div class="card-body">
-                    <h2 class="card-title fs-5">{{$movie->title}}</h2>
+                    <h2 class="card-title fs-5">
+                        <a href="{{ url('/movies/infos', ['id' => $movie->id]) }}" class="text-decoration-none text-black fw-semibold">
+                        {{$movie->title}}
+                        @if ($movie->adult))
+                            <i class="bi bi-exclamation-triangle-fill" title="Ce film est réservé à un public adulte"></i>
+                        @endif
+                        </a>
+                    </h2>
                         <p class="rating">
                             @for ($i = 0; $i < 5; $i++)
                                 @if ($i < round($movie->vote_average/2))
@@ -25,7 +34,7 @@
                                     <i class="bi bi-star"></i>
                                 @endif
                             @endfor
-                    </p>
+                        </p>
                     <h3 class="card-text">{{$movie->tagline}}</h3>
                     <p class="card-text fw-light">{{ \Illuminate\Support\Str::limit($movie->overview, 400) }}</p>
                   </div>

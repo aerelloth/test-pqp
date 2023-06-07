@@ -4,7 +4,7 @@
         <div class="navbar-nav" id="links">
             <ul class="navbar-nav flex-row">
                 <li class="nav-item ps-2 pe-2">
-                    <a class="nav-link" href="{{ url('/movies') }}" title="Tous les films">
+                    <a class="nav-link" href="{{ route('home') }}" title="Tous les films">
                         <i class="bi bi-film d-inline d-md-none"></i>
                         <span class="d-none d-md-inline">Tous les films</span>
                     </a>
