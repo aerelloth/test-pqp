@@ -3,8 +3,9 @@
 @section('content')
 
 <div class="text-center">
-    <h1 class="pt-3 pb-5">Tous les films</h1>
+    <h1 class="pt-3 pb-3">Tous les films</h1>
 
+    <a href="{{ url('/movies/add') }}" class="btn btn-outline-primary mb-3"><i class="bi bi-plus-square"></i> Ajouter un film</a>
     @if ($movies->isEmpty())
         <p>Il n'y a encore aucun film enregistré.</p>
     @else
@@ -22,8 +23,8 @@
             @foreach ($movies as $movie)
             <tr>
                 <td>
-                    <a href="{{ url('/detail', ['id' => $movie->id]) }}"><i class="bi bi-pencil-square"></i></a>
-                    <a href="{{ url('/delete', ['id' => $movie->id]) }}"><i class="bi bi-x-square"></i></a>
+                    <a href="{{ url('/movies/detail', ['id' => $movie->id]) }}"><i class="bi bi-pencil-square"></i></a>
+                    <a href="{{ url('/movies/delete', ['id' => $movie->id]) }}"><i class="bi bi-x-square"></i></a>
                 </td>
                 @foreach ($movie->getAttributes() as $value)
                     <td>{{ \Illuminate\Support\Str::limit($value, 100) }}</td>
