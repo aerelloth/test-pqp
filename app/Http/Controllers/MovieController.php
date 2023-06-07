@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Movie;
 
 class MovieController extends Controller
@@ -29,6 +30,41 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'adult' => 'nullable|boolean',
+            'backdrop_path' => 'nullable|string',
+            'belongs_to_collection' => 'nullable|string',
+            'budget' => 'nullable|numeric',
+            'genres' => 'nullable|string',
+            'homepage' => 'nullable|string',
+            'api_id' => 'nullable|integer',
+            'imdb_id' => 'nullable|string',
+            'original_language' => 'nullable|string',
+            'original_title' => 'nullable|string',
+            'overview' => 'nullable|string',
+            'popularity' => 'nullable|numeric',
+            'poster_path' => 'nullable|string',
+            'production_companies' => 'nullable|string',
+            'production_countries' => 'nullable|string',
+            'release_date' => 'nullable|date',
+            'revenue' => 'nullable|numeric',
+            'runtime' => 'nullable|integer',
+            'spoken_languages' => 'nullable|string',
+            'status' => 'nullable|string',
+            'tagline' => 'nullable|string',
+            'title' => 'required|string',
+            'video' => 'nullable|boolean',
+            'vote_average' => 'nullable|numeric',
+            'vote_count' => 'nullable|integer'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $movie = Movie::create($data);
+
+        return redirect()->back()->with('success', 'Le film a été ajouté avec succès.');
     }
 
     /**
