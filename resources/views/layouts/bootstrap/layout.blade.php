@@ -12,7 +12,7 @@
             @include('layouts.bootstrap._header')
         </header>
         <main>
-            <div class="container mt-5">
+            <div class="container mt-5 mb-5">
                 @include('layouts.bootstrap._alerts')
                 @yield('content')
             </div>

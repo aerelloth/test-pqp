@@ -14,11 +14,6 @@ use App\Http\Controllers\MovieController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -30,10 +25,23 @@ Route::middleware([
 });
 
 /* MOVIES */
+
+// APP
+
+//Affichage tous
+Route::get('/', [MovieController::class, 'displayAll'])->name('home');
+
+//Détail film
+Route::get('/movies/infos/{id}', [MovieController::class, 'displayOne'])->name('movies_infos');
+
+
+
+// ADMIN //
+
 //Listing
 Route::get('/movies/listing', [MovieController::class, 'index'])->name('movies_listing');
 
-//Détail film
+//Détail film (formulaire)
 Route::get('/movies/detail/{id}', [MovieController::class, 'show'])->name('movies_detail');
 
 //Suppression film

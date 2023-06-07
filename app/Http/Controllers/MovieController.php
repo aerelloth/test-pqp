@@ -18,6 +18,15 @@ class MovieController extends Controller
     }
 
     /**
+     * Display a listing of the resource (viewer format).
+     */
+    public function displayAll()
+    {
+        $movies = Movie::all();
+        return view('movies/display-all', ['movies' => $movies]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -77,6 +86,18 @@ class MovieController extends Controller
             return redirect()->route('movies_listing');
         }
         return view('movies.detail', ['movie' => $movie]);
+    }
+
+    /**
+     * Display the specified resource (viewer format).
+     */
+    public function displayOne(string $id)
+    {
+        $movie = Movie::find($id);
+        if (is_null($movie)) {
+            return redirect()->route('home');
+        }
+        return view('movies.display-one', ['movie' => $movie]);
     }
 
     /**
