@@ -18,5 +18,10 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $this->call(ApiConfigurationSeeder::class);
+        $this->call(MoviesSeeder::class);
+        $this->call(PermissionsDemoSeeder::class);
+
     }
 }
