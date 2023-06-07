@@ -46,3 +46,6 @@ Route::get('/movies/detail/{id}', [MovieController::class, 'show'])->name('movie
 
 //Suppression film
 Route::get('/movies/delete/{id}', [MovieController::class, 'destroy']);
+
+//Import films (pour test)
+Route::get('/movies/import', [MovieController::class, 'import']);
