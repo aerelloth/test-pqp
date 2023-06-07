@@ -36,16 +36,19 @@ Route::get('/movies/infos/{id}', [MovieController::class, 'displayOne'])->name('
 
 
 
-// ADMIN //
+// ADMIN : routes nécessitant d'être connecté et d'avoir la permission admin //
 
-//Listing
-Route::get('/movies/listing', [MovieController::class, 'index'])->name('movies_listing');
+Route::middleware(['check.admin'])->group(function () {
 
-//Détail film (formulaire)
-Route::get('/movies/detail/{id}', [MovieController::class, 'show'])->name('movies_detail');
+    //Listing
+    Route::get('/movies/listing', [MovieController::class, 'index'])->name('movies_listing');
 
-//Suppression film
-Route::get('/movies/delete/{id}', [MovieController::class, 'destroy']);
+    //Détail film (formulaire)
+    Route::get('/movies/detail/{id}', [MovieController::class, 'show'])->name('movies_detail');
 
-//Import films (pour test)
-Route::get('/movies/import', [MovieController::class, 'import']);
+    //Suppression film
+    Route::get('/movies/delete/{id}', [MovieController::class, 'destroy']);
+
+    //Import films
+    Route::get('/movies/import', [MovieController::class, 'import']);
+});
