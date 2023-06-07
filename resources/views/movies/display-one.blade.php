@@ -16,22 +16,36 @@
         </h1>
         <h2 class="fst-italic fw-light fs-5">{{$movie->original_title}}</h2>
             <p class="rating pt-2">
+                @php $rating = round($movie->vote_average, 1); @endphp
                 @for ($i = 0; $i < 5; $i++)
-                    @if ($i < round($movie->vote_average/2))
+                    @if ($i < $rating/2)
                         <i class="bi bi-star-fill"></i>
                     @else
                         <i class="bi bi-star"></i>
                     @endif
                 @endfor
+                <span class="ps-2 fw-light">Note moyenne de <span class="fw-normal">
+                    {{number_format($rating, 1, ',', '.')}}/10 </span>({{$movie->vote_count}} votes)</span>
             </p>
             @if ($movie->release_date)
                 @php $formattedReleaseDate = date('d/m/Y', strtotime($movie->release_date)); @endphp
-                <p>Date de sortie : {{$formattedReleaseDate}}</p>
+                <p>Date de sortie : <span class="fw-light">{{$formattedReleaseDate}}</span></p>
+            @endif
+            @if ($movie->budget)
+                <p>Budget : <span class="fw-light">{{ number_format($movie->budget, 0, ',', '.') }} $</span></p>
+            @endif
+            @if ($movie->revenue)
+                <p>Recettes : <span class="fw-light">{{ number_format($movie->revenue, 0, ',', '.') }} $</span></p>
             @endif
             @if($movie->tagline)
-                <h3>{{$movie->tagline}}</h3>
+                <h3 class="fs-5 fw-semibold">{{$movie->tagline}}</h3>
             @endif
+            @if($movie->overview)
             <p>{{$movie->overview}}</p>
+            @endif
+            @if($movie->homepage)
+            <a href="{{$movie->homepage}}" class="btn btn-outline-secondary" target="_blank">En savoir plus</a>
+            @endif
           </div>
         </div>
     </div>

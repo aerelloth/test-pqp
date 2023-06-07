@@ -35,7 +35,6 @@
                                 @endif
                             @endfor
                         </p>
-                    <h3 class="card-text">{{$movie->tagline}}</h3>
                     <p class="card-text fw-light">{{ \Illuminate\Support\Str::limit($movie->overview, 400) }}</p>
                   </div>
                 </div>
