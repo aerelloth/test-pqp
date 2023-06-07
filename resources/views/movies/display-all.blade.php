@@ -45,5 +45,9 @@
     @endif
 </div>
 
+<div class="pagination d-block mt-3">
+    {{ $movies->links() }}
+</div>
+
 @endsection
 

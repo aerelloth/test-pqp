@@ -9,6 +9,8 @@ use App\Models\ApiConfig;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 
 class MovieController extends Controller
 {
@@ -27,7 +29,7 @@ class MovieController extends Controller
     public function displayAll()
     {
         $api_config = ApiConfig::orderBy('updated_at', 'DESC')->first();
-        $movies = Movie::all()->sortByDesc('updated_at');
+        $movies = Movie::orderByDesc('updated_at')->paginate(12);
         return view('movies/display-all', compact('movies', 'api_config'));
     }
 
