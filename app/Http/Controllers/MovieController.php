@@ -159,6 +159,12 @@ class MovieController extends Controller
 
                 $movie['api_id'] = $movie['id'];
                 $addedMovie = $this->addToDb($movie);
+
+                //On ajoute les données individuelles si on n'a pas encore enregistré ce film en BDD
+                if ($addedMovie->wasRecentlyCreated) {
+                    sleep(1);
+                    $this->importSingle($movie['api_id']);
+                }
             }
             return redirect()->route('movies_listing')->with('success', 'Les films du jour ont été ajoutés avec succès');
         }
@@ -168,8 +174,41 @@ class MovieController extends Controller
         }
     }
 
-    public function addToDb(array $movie) {
+     /**
+     * Imports detailled movie data from the TheMovieDB API
+     */
+    public function importSingle(string $id)
+    {
+        $apiKey = config('api.api_key');
+        $apiUrl = config('api.api_url');
+        $apiVerify = config('api.api_verify');
 
+        $client = new GuzzleClient();
+        try {
+                $response = $client->request('GET', $apiUrl.'movie/'.$id, [
+                    RequestOptions::VERIFY => $apiVerify,
+                    'headers' => [
+                    'Authorization' => 'Bearer '.$apiKey,
+                    'accept' => 'application/json',
+                  ],
+            ]);
+
+            $data = json_decode($response->getBody()->getContents(), true);
+            $data['api_id'] = $data['id'];
+            foreach($data as &$field) {
+                if(is_array($field)) {
+                    $field = json_encode($field);
+                }
+            }
+            $this->addToDb($data);
+        }
+        catch (GuzzleException $e) {
+            //par la suite, ajouter le log en BDD et/ou l'envoyer par mail à l'admin
+            //echo $e;
+        }
+    }
+
+    public function addToDb(array $movie) {
         $validator = Validator::make($movie, [
             'adult' => 'nullable|boolean',
             'backdrop_path' => 'nullable|string',

@@ -47,8 +47,8 @@ Route::middleware(['check.admin'])->group(function () {
     Route::get('/movies/detail/{id}', [MovieController::class, 'show'])->name('movies_detail');
 
     //Suppression film
-    Route::get('/movies/delete/{id}', [MovieController::class, 'destroy']);
+    Route::get('/movies/delete/{id}', [MovieController::class, 'destroy'])->name('movies_delete');
 
     //Import films
-    Route::get('/movies/import', [MovieController::class, 'import']);
+    Route::get('/movies/import', [MovieController::class, 'import'])->name('movies_import');
 });

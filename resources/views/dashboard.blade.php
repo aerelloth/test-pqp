@@ -14,7 +14,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4">
                 <div class="p-5 m-3 bg-light border rounded-3">
-                    <a href="{{ route('movies_listing') }}">
+                    <a href="{{ route('movies_import') }}">
                     <i class="bi bi-arrow-repeat display-1"></i>
                     </a>
                     <p class="mt-2">Lancer la synchro API</p>
