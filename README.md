@@ -12,6 +12,7 @@ Imports via l'API [TheMovieDB](https://developer.themoviedb.org/docs).
 -   récupérer le projet sur Github : https://github.com/aerelloth/test-pqp
 -   créer la base de données
 -   configurer les infos de la base de données et de l’API dans le fichier `.env`
+-   installer les dépendances avec `composer install`
 -   effectuer les migrations : `php artisan migrate`
 -   exécuter les seeders : `php artisan db:seed`
 -   lancer l'application avec `php artisan serve`
